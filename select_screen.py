@@ -85,7 +85,7 @@ def select_screen(screen,state):
         action=0,
     )
     greedy_btn = element.UIElement(
-        center_position=(850, 525),
+        center_position=(800, 525),
         font_size=30,
         bg_rgb=WHITE,
         text_rgb=DARKRED,
@@ -94,11 +94,29 @@ def select_screen(screen,state):
         action=0,
     )
     miniMax_btn = element.UIElement(
-        center_position=(1050, 525),
+        center_position=(930, 525),
         font_size=30,
         bg_rgb=WHITE,
         text_rgb=DARKRED,
         text="MINIMAX",
+        id=2,
+        action=0,
+    )
+    aStar_btn = element.UIElement(
+        center_position=(1050, 525),
+        font_size=30,
+        bg_rgb=WHITE,
+        text_rgb=DARKRED,
+        text="ASTAR",
+        id=2,
+        action=0,
+    )
+    aStarRealTime_btn = element.UIElement(
+        center_position=(1250, 525),
+        font_size=30,
+        bg_rgb=WHITE,
+        text_rgb=DARKRED,
+        text="ASTARREALTIME",
         id=2,
         action=0,
     )
@@ -139,7 +157,7 @@ def select_screen(screen,state):
         action=0,
     )
     greedy_btn2 = element.UIElement(
-        center_position=(850, 575),
+        center_position=(800, 575),
         font_size=30,
         bg_rgb=WHITE,
         text_rgb=DARKBLUE,
@@ -148,7 +166,7 @@ def select_screen(screen,state):
         action=0,
     )
     miniMax_btn2 = element.UIElement(
-        center_position=(1050, 575),
+        center_position=(930, 575),
         font_size=30,
         bg_rgb=WHITE,
         text_rgb=DARKBLUE,
@@ -156,8 +174,26 @@ def select_screen(screen,state):
         id=2,
         action=0,
     )
-    selection_buttons=[human_btn,pacifist_btn,passive_btn,greedy_btn,agressive_btn,miniMax_btn,
-                       human_btn2,pacifist_btn2,passive_btn2,greedy_btn2,agressive_btn2,miniMax_btn2]
+    aStar_btn2 = element.UIElement(
+        center_position=(1050, 575),
+        font_size=30,
+        bg_rgb=WHITE,
+        text_rgb=DARKBLUE,
+        text="ASTAR",
+        id=2,
+        action=0,
+    )
+    aStarRealTime_btn2 = element.UIElement(
+        center_position=(1250, 575),
+        font_size=30,
+        bg_rgb=WHITE,
+        text_rgb=DARKBLUE,
+        text="ASTARREALTIME",
+        id=2,
+        action=0,
+    )
+    selection_buttons=[human_btn,pacifist_btn,passive_btn,greedy_btn,agressive_btn,miniMax_btn,aStar_btn,aStarRealTime_btn,
+                       human_btn2,pacifist_btn2,passive_btn2,greedy_btn2,agressive_btn2,miniMax_btn2,aStar_btn2,aStarRealTime_btn2]
     while True:
         mouse_up = False
         for event in pygame.event.get():

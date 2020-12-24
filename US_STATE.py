@@ -120,6 +120,7 @@ class US_STATE:
 
 
     def initializeState(self):
+
         available_countries = [self.c1, self.c2, self.c3, self.c4, self.c5, self.c6, self.c7, self.c8, self.c9, self.c10,
                                self.c11, self.c12, self.c13, self.c14, self.c15, self.c16, self.c17, self.c18, self.c19,
                                self.c20, self.c21, self.c22, self.c23, self.c24, self.c25, self.c26, self.c27, self.c28, self.c29,
@@ -161,34 +162,69 @@ class US_STATE:
                 if blueTroops == 0:
                     canAddBlue = False
     def updateStateAI(self):
-        if self.turn :
+        if (self.turn and (self.agent2.type=="MINIMAX" or self.agent2.type == "ASTAR")) :
+            self.agent2.takeTurn(self.countries)
+            self.turn=False
+            self.checkEndGame()
+
+
+        elif (not self.turn and(self.agent1.type=="MINIMAX" or self.agent1.type == "ASTAR")):
+            self.agent1.takeTurn(self.countries)
+            self.turn=True
+            self.checkEndGame()
+
+
+        elif self.turn :
             self.agent2.takeTurn()
             self.turn=False
+            self.checkEndGame()
+
+
         else:
             self.agent1.takeTurn()
             self.turn=True
-
-    def updateStatehuman(self):
-        if self.turn :
-            if self.agent2.takeTurn():
-                self.turn = False
-        if self.turn:
-            self.agent2.takeTurn()
-            self.turn = False
-        else:
-            self.agent1.takeTurn()
-            self.turn = True
+            self.checkEndGame()
 
     def updateStatehuman(self):
         if self.turn:
             self.agent2.bonusTroops=self.agent2.calcBonusTroops()
             if self.agent2.attack(self.attackingCountries[0],self.attackingCountries[1],self.amountofattackingtroops):
                 self.turn = False
+                self.checkEndGame()
+            else:
+                ctypes.windll.user32.MessageBoxW(0, "PLEASE SELECT VALID ATTACK !", 1)
+                self.agent2.bonusTroops = 0
+
+
         else:
             self.agent1.bonusTroops = self.agent1.calcBonusTroops()
             if self.agent1.attack(self.attackingCountries[0],self.attackingCountries[1],int(self.amountofattackingtroops)):
-
                 self.turn = True
-        print("Agent1 Bonus Troops: "+str(self.agent1.bonusTroops))
-        print("Agent2 bonus Troops: "+str(self.agent2.bonusTroops))
-        print("**************")
+                self.checkEndGame()
+            else:
+                ctypes.windll.user32.MessageBoxW(0, "PLEASE SELECT VALID ATTACK !", 1)
+                self.agent1.bonusTroops=0
+
+
+
+    def checkEndGame(self):
+        if len(self.agent1.countries) == 0:
+            ctypes.windll.user32.MessageBoxW(0, "PLAYER 2 WINS", "ALERT", 1)
+            self.restart()
+        if len(self.agent2.countries) == 0:
+            ctypes.windll.user32.MessageBoxW(0, "PLAYER 1 WINS", "ALERT", 1)
+            self.restart()
+
+
+    def restart(self):
+        for c in self.agent1.countries:
+            c.numOfTroops = 0
+        for c in self.agent2.countries:
+            c.numOfTroops = 0
+        self.agent1.countries.clear()
+        self.agent2.countries.clear()
+        self.agent1.bonusTroops=0
+        self.agent2.bonusTroops=0
+
+        self=US_STATE(self.agent1,self.agent2)
+        self.initializeState()

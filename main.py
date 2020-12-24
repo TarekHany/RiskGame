@@ -52,11 +52,16 @@ def main():
             break
 
         if(game_state== GameState.egypt):
+
             game_state = egypt_screen(screen)
+
+
         if (game_state == GameState.us):
-            if(random_state.agent1 !=None and random_state.agent2!=None):
+            if(random_state.agent1 !=None and random_state.agent2!=None and random_state.agent1.color != random_state.agent2.color ):
                 game_state = us_screen(screen,random_state.agent1,random_state.agent2)
             else:
+                ctypes.windll.user32.MessageBoxW(0, "PLEASE SELECT 2 DIFFERENT COLOR PLAYERS", 1)
+                game_state = select_screen(screen, random_state)
                 print("PLEASE SELECT PLAYER")
 
 

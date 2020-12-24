@@ -1,16 +1,22 @@
 from Agent import *
 import ctypes
 import time
+import threading
 
 
 class GreedyAgent(Agent):
+    c=None
+    num=0
+
+    def func(self):
+        #country.numOfTroops=num
+        self.c.numOfTroops=self.num
     def takeTurn(self):
 
         # time.sleep(5)
-        self.addBonusTroops()
-        # time.sleep(5)
+        troopsAddedToCountry=self.addBonusTroops()
+        print(troopsAddedToCountry.id)
         self.attackHelper()
-        # time.sleep(5)
         return True
 
     def addBonusTroops(self):
@@ -38,7 +44,10 @@ class GreedyAgent(Agent):
                 myCountries[indexToPutTroops].numOfTroops += bonustroops
                 print(myCountries[indexToPutTroops].id)
                 flag = False
-                return
+                print(myCountries[indexToPutTroops].id)
+                return myCountries[indexToPutTroops]
+
+                #return
             else:
                 del surroundedwith[indexToPutTroops]
 

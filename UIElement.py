@@ -115,6 +115,7 @@ class UIElement(Sprite):
                 if (text == "GREEDY"):
                     agent = GreedyAgent("GREEDY", color)
                 if (text == "PASSIVE"):
+                    
                     agent = PassiveAgent("PASSIVE", color)
                 if (text == "MINIMAX"):
                     agent = MinimaxAgent("MINIMAX", color)
@@ -128,6 +129,7 @@ class UIElement(Sprite):
                     state.agent1 = self.agentsArray[0]
                     state.agent2 = self.agentsArray[1]
                     self.agentsArray.clear()
+
                     return
         else:
             self.mouse_over = False

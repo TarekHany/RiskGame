@@ -120,6 +120,7 @@ def select_screen(screen,state):
         id=2,
         action=0,
     )
+
     human_btn2 = element.UIElement(
         center_position=(100,575),
         font_size=30,

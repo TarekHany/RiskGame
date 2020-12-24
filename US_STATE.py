@@ -180,6 +180,7 @@ class US_STATE:
             self.checkEndGame()
 
 
+  
         else:
             self.agent1.takeTurn()
             self.turn=True

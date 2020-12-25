@@ -1,6 +1,6 @@
 from Agent import *
-from Node import *
 from US_STATE import *
+import copy
 class MinimaxAgent(Agent):
 
     def takeTurn(self, countries):

@@ -10,7 +10,7 @@ import UIElement
 from UIElement import *
 import UISprite
 import US_STATE
-from US_STATE import *
+from EG_STATE import *
 import player
 from player import *
 import input_box
@@ -22,18 +22,15 @@ BLACK = (0, 0, 0)
 DARKRED = (229, 12, 22)
 DARKBLUE = (2, 8, 126)
 
-def us_screen(screen,agent1,agent2):
+def eg_screen(screen,agent1,agent2):
 
-    countriesPositions = [(200, 50),(150, 150), (100, 300), (270, 170), (195, 300),
-                   (380, 100), (410, 220), (315, 310), (300, 460), (565, 110),
-                    (565, 200),(565, 280), (450, 340),(430, 470), (600, 370),
-                    (620, 450),(600, 580), (700, 170),(720, 270), (730, 380),
-                    (770, 500),(750, 570), (800, 200),(900, 170), (800, 320),
-                    (880, 310),(950, 310), (1050, 350), (1050, 270), (1100, 200),
-                    (1050, 425), (900, 445), (900, 530), (820, 530), (980, 530),
-                    (1035, 490), (1035, 650)]
+    countriesPositions = [(240, 142),(380, 530), (485, 265), (650, 268), (626.5, 235),
+                   (677, 201), (650, 113), (597, 101), (720, 65), (726, 114),
+                    (773, 81),(787, 117), (785, 177),(864, 112), (861, 178),
+                    (1011, 105),(1011, 204), (832, 325),(735, 340), (800, 388),
+                    (910, 426),(918, 592)]
 
-    state= US_STATE(agent1, agent2)
+    state= EG_STATE(agent1, agent2)
 
     state.initializeState()
     element = UIElement
@@ -87,7 +84,7 @@ def us_screen(screen,agent1,agent2):
                                             action=5,
                                             id=i,
                                             )
-        e.num="us"+str(i+1)
+        e.num="eg"+str(i+1)
         uiElements.append(e)
 
         i+=1
@@ -99,8 +96,8 @@ def us_screen(screen,agent1,agent2):
                 mouse_up = True
 
         screen.fill(BLUE)
-        usmapimage = pygame.image.load("assets/USMAP.png")
-        screen.blit(usmapimage, (50, 0))
+        egmapimage = pygame.image.load("assets/egyptmapgame.png")
+        screen.blit(egmapimage, (75, 50))
         for event in pygame.event.get():
             text = inputbox.handle_event(event)
             if text != None:

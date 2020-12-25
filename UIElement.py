@@ -3,6 +3,8 @@ import pygame.freetype
 from pygame.sprite import Sprite
 import US_STATE
 from MinimaxAgent import MinimaxAgent
+#from RealTimeAStar import RealTimaAStarAgent
+#from AStarAgent import AStarAgent
 from US_STATE import *
 import main
 import math
@@ -73,6 +75,15 @@ class UIElement(Sprite):
     @property
     def rect(self):
             return self.rects[1] if self.mouse_over else self.rects[0]
+    def restart(self,mouse_pos,mouse_up,state):
+        if self.rect.collidepoint(mouse_pos):
+            self.mouse_over = True
+            if mouse_up:
+                state.restart()
+                return self.action
+        else:
+            self.mouse_over = False
+
     def update(self, mouse_pos,mouse_up):
 
             if self.rect.collidepoint(mouse_pos):
@@ -104,15 +115,21 @@ class UIElement(Sprite):
                 if (text == "GREEDY"):
                     agent = GreedyAgent("GREEDY", color)
                 if (text == "PASSIVE"):
+
                     agent = PassiveAgent("PASSIVE", color)
                 if (text == "MINIMAX"):
                     agent = MinimaxAgent("MINIMAX", color)
+                if (text == "ASTAR"):
+                    agent = AStarAgent("ASTAR", color)
+                if (text == "ASTARREALTIME"):
+                    agent = RealTimaAStarAgent("ASTARREALTIME", color)
                 if len(self.agentsArray) < 2:
                     self.agentsArray.append(agent)
                 if (len(self.agentsArray) == 2):
                     state.agent1 = self.agentsArray[0]
                     state.agent2 = self.agentsArray[1]
                     self.agentsArray.clear()
+
                     return
         else:
             self.mouse_over = False
@@ -127,6 +144,7 @@ class UIElement(Sprite):
                     self.update_bonus(country)
                 else:
                     state.addToCurrentCountries(country)
+                print(country.owner.type)
         else:
             self.mouse_over = False
     def update_bonus(self,country):

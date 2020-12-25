@@ -7,7 +7,8 @@ import ctypes
 class Human(Agent):
 
     def canAttack(self, countryAttackFrom, countryAttackTo, amountOfTroops):
-        if countryAttackFrom.owner == self and countryAttackTo in countryAttackFrom.neighbors and amountOfTroops < countryAttackFrom.numOfTroops and amountOfTroops >= countryAttackTo.numOfTroops:
+        if countryAttackFrom.owner == self and countryAttackTo in countryAttackFrom.neighbors \
+                and amountOfTroops < countryAttackFrom.numOfTroops and amountOfTroops >= countryAttackTo.numOfTroops:
             return True
         else:
             return False

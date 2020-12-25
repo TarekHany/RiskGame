@@ -9,9 +9,7 @@ class PassiveAgent(Agent):
         if country is None:
             print("No more attacks")
             return
-        print(country)
         amount = self.calcBonusTroops()
-        print(amount)
         country.numOfTroops = country.numOfTroops + amount
 
     # choose the country with minimum troops

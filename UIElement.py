@@ -4,7 +4,7 @@ from pygame.sprite import Sprite
 import US_STATE
 from MinimaxAgent import MinimaxAgent
 #from RealTimeAStar import RealTimaAStarAgent
-#from AStarAgent import AStarAgent
+from AStarAgent import AStarAgent
 from US_STATE import *
 import main
 import math
